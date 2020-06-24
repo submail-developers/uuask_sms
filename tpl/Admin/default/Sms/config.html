@@ -1,0 +1,80 @@
+<include file="public:header"/>
+<div class="allpagetop">工具<strong>/</strong>短信</div>
+<div class="admin_main_nr_dbox">
+    <div class="pagetit">
+        <div class="ptit">短信</div>
+        <include file="Sms/topnav"/>
+        <div class="clear"></div>
+    </div>
+
+
+    <div class="toptit">短信配置<span class="note link_g">(优优问答集成赛邮云短信平台，若使用手机短信功能请先获取赛邮云短信密钥，<a
+            href="https://www.mysubmail.com/chs/store" target="_blank"><strong>点击获取</strong></a>)</span></div>
+    <form action="{:RU('config/edit')}" method="post" name="FormData" id="FormData">
+        <div class="admin_form_main">
+
+            <div class="fl">开启短信:</div>
+            <div class="fr">
+                <div class="imgchecked_small <if condition=" $show.UU_SMS_OPEN eq 1
+                "> select</if>"><input name="UU_SMS_OPEN" type="hidden" value="{$show.UU_SMS_OPEN}"/></div>
+            <div class="note">关闭短信会使部分相关功能不可用，如：手机短信登录，免注册发布问题和文章等...</div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="moreform"
+        <if condition="$show.UU_SMS_OPEN eq 1 ">style="display:block"</if>
+        >
+        <div class="fl">服务商:</div>
+        <div class="fr">
+            <div class="imgradio">
+                <input name="UU_SMS_SERVICE" type="hidden" value="{$show.UU_SMS_SERVICE}"/>
+                <div class="radio {$show['UU_SMS_SERVICE']==='submail' ? 'select' : ''}" data="smsbao">
+                    赛邮云短信{$show['UU_SMS_SERVICE']}
+                </div>
+                <div class="radio {$show['UU_SMS_SERVICE']==='aliyun' ? 'select' : ''}" data="aliyun">阿里云</div>
+                <div class="radio {$show['UU_SMS_SERVICE']==='alidayu' ? 'select' : ''}" data="alidayu">阿里大于</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="fl">Appid/赛邮云用户名:</div>
+        <div class="fr"><input name="UU_SMS_APPKEY" type="text" class="input_text_default" maxlength="60"
+                               placeholder="输入APPKEY" value="{$show.UU_SMS_APPKEY}"/>
+        </div>
+        <div class="fl">Signature/赛邮云密码:</div>
+        <div class="fr">
+            <input name="UU_SMS_SECRETKEY" type="text" class="input_text_default" maxlength="100"
+                   placeholder="输入SECRETKEY" value="{$show.UU_SMS_SECRETKEY}"/>
+        </div>
+        <div class="fl">短信签名:</div>
+        <div class="fr">
+            <input name="UU_SMS_SIGNATURE" type="text" class="input_text_default" maxlength="300"
+                   placeholder="输入SIGNATURE（签名），如：优优问答" value="{$show.UU_SMS_SIGNATURE}"/>
+        </div>
+</div>
+<div class="fl"></div>
+<div class="fr">
+    <input name="" type="submit" class="admin_submit big" value="保存配置"/>
+</div>
+
+
+<div class="clear"></div>
+
+</div>
+
+
+</form>
+</div>
+<include file="public:footer"/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.imgchecked_small').click(function () {
+            if ($(this).find("input").val() == '1') {
+                $(".moreform").hide();
+            } else {
+                $(".moreform").show();
+            }
+        });
+    });
+</script>
+</body>
+</html>
